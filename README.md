@@ -14,3 +14,6 @@
 - 定式化を変えなければならないかも
 - 最適化問題を拡張していきたい
 
+## 研究関連のリンク
+[simulation](https://github.com/teru12012000/simulation)
+

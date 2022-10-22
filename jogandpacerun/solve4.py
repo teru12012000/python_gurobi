@@ -31,15 +31,15 @@ for i in range((n//2)+1):
   fig+=2*(x3[i]*(1.1*x1[i]+1.65*x2[i])+35*x4[i]+40*x5[i])
   fit*=math.exp(-1/45)
   fit+=(x3[i]*(1.1*x1[i]+1.65*x2[i])+35*x4[i]+40*x5[i])
-  model.addConstr(fit-fig>=(-1*(i+1)*20))
+  model.addConstr(fit-fig>=(-1*(i+1)*15))
 for i in range((n//2)+1,n):
   fig*=math.exp(-1/15)
   fig+=2*(x3[i]*(1.1*x1[i]+1.65*x2[i])+35*x4[i]+40*x5[i])
   fit*=math.exp(-1/45)
   fit+=(x3[i]*(1.1*x1[i]+1.65*x2[i])+35*x4[i]+40*x5[i])
-  model.addConstr(fit-fig>=(-1*(i+1)*10))
-model.addConstr(gp.quicksum(x1[i] for i in range(n))+gp.quicksum(x2[i] for i in range(n))>=10)
-model.addConstr(gp.quicksum(x4[i] for i in range(n))+gp.quicksum(x5[i] for i in range(n))>=2)  
+  model.addConstr(fit-fig>=(-1*(i+1)*8))
+model.addConstr(gp.quicksum(x1[i] for i in range(n))+gp.quicksum(x2[i] for i in range(n))>=8)
+model.addConstr(gp.quicksum(x4[i] for i in range(n))+gp.quicksum(x5[i] for i in range(n))==2)  
 model.setObjective(gp.quicksum((x3[i-1]*(1.1*x1[i-1]+1.65*x2[i-1])+35*x4[i-1]+40*x5[i-1])*math.exp(-(n-i)/45) for i in range(1,n+1)),gp.GRB.MAXIMIZE)
 model.optimize()
 print(model.ObjVal)
@@ -52,7 +52,7 @@ for i in range(n):
   fit*=math.exp(-1/45)
   fit+=(x3[i].X*(1.1*x1[i].X+1.65*x2[i].X)+35*x4[i].X+40*x5[i].X)
   print(fit)
-print(fig)
+print(fit-fig)
   
   
 

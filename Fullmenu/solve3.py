@@ -1,7 +1,8 @@
-#jogとペース走とOFF(14日間)
+#FULLMENU!!!
 import math
 import gurobipy as gp
-model=gp.Model('jog_or_pacerun')
+import time
+model=gp.Model('FULLMENU')
 n=13
 
 x1=[]
@@ -33,7 +34,7 @@ for i in range(n):
   fig+=2*(x3[i]*(1.1*x1[i]+1.65*x2[i])+35*x4[i]+36*x7[i])
   fit*=math.exp(-1/45)
   fit+=(x3[i]*(1.1*x1[i]+1.65*x2[i])+35*x4[i]+36*x7[i])
-  if i==1 or i==6 or i==8:
+  if i==6 or i==8:
     model.addConstr(fit-fig>=-100)    
 model.addConstr(fit-fig>=-100)
 model.setObjective(fit,gp.GRB.MAXIMIZE)
@@ -42,8 +43,10 @@ model.setObjective(fit,gp.GRB.MAXIMIZE)
 model.addConstr(gp.quicksum(x1[i] for i in range(n))+gp.quicksum(x2[i] for i in range(n))>=5)
 model.addConstr(gp.quicksum(x1[i] for i in range(n))>=1)
 model.addConstr(gp.quicksum(x4[i] for i in range(n))==2)
-model.addConstr(gp.quicksum(x7[i] for i in range(n))==1)  
+model.addConstr(gp.quicksum(x7[i] for i in range(n))==1)
+start=time.perf_counter()  
 model.optimize()
+print(time.perf_counter()-start)
 print(model.ObjVal)
 fig=0
 fit=0

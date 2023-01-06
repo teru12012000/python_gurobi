@@ -31,9 +31,9 @@ model.addConstr(x4[6]==1)
 model.addConstr(x7[9]==1)
 for i in range(n):
   fig*=math.exp(-1/15)
-  fig+=2*(x3[i]*(1.1*x1[i]+1.65*x2[i])+35*x4[i]+40*x7[i])
+  fig+=2*(x3[i]*(1.1*x1[i]+1.65*x2[i])+35*x4[i]+36*x7[i])
   fit*=math.exp(-1/45)
-  fit+=(x3[i]*(1.1*x1[i]+1.65*x2[i])+35*x4[i]+40*x7[i])
+  fit+=(x3[i]*(1.1*x1[i]+1.65*x2[i])+35*x4[i]+36*x7[i])
   if i==6 or i==8 or i==12:
     model.addConstr(fit-fig>=-100)    
 model.addConstr(fit-fig>=-100)
@@ -53,7 +53,7 @@ fit=0
 for i in range(n):
   print(x1[i].X,x2[i].X,x3[i].X,x4[i].X,x7[i].X)
   fig*=math.exp(-1/15)
-  fig+=2*(x3[i].X*(1.1*x1[i].X+1.65*x2[i].X)+35*x4[i].X+40*x7[i].X)
+  fig+=2*(x3[i].X*(1.1*x1[i].X+1.65*x2[i].X)+35*x4[i].X+36*x7[i].X)
   fit*=math.exp(-1/45)
   fit+=(x3[i].X*(1.1*x1[i].X+1.65*x2[i].X)+35*x4[i].X+36*x7[i].X)
 print(fit-fig)
